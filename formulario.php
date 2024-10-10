@@ -3,7 +3,13 @@
     
     $error_nombre = $error_email = $error_edad = $error_pais = false;
     $errores = $hola_nombre = '';
-    if (!empty($_POST['paso'])) {
+    if(!empty($_GET['paso'])){
+        $_SESSION['nombre_usuario'] = $_GET['nombre'];
+        $_SESSION['email_usuario'] = $_GET['email'];
+        $_SESSION['edad_usuario'] = $_GET['edad'];
+        $_SESSION['pais_usuario'] = $_GET['pais'];
+
+        
         if (empty($_POST['nombre'])) {
             $errores = "<span class=\"error\">¡ERROR! No se ha enviado ningún nombre de usuario.<br /></span>";
             $error_nombre = true;
@@ -21,17 +27,10 @@
         }
         $nombre_usuario = $_POST['nombre'];
         $email = $_POST['email'];
-        
-    }
-    if(!empty($_GET['paso'])){
-        $_SESSION['nombre_usuario'] = $_GET['nombre'];
-        $_SESSION['email_usuario'] = $_GET['email'];
-        $_SESSION['edad_usuario'] = $_GET['edad'];
-        $_SESSION['pais_usuario'] = $_GET['pais'];
-
         header("location: informacion.php");
         exit();
     }
+    
 
     
 ?>  
@@ -55,30 +54,30 @@
 
         <input type="hidden" name="paso" value="1" />
         <div class="mb-3 row <?php echo $error_nombre; ?>">
-            <label for="staticName" class="col-sm-2 col-form-label">Nombre</label>
+            <label for="errorNombre" class="col-sm-2 col-form-label">Nombre</label>
             <div class="col-sm-10">
-            <input type="text" name="nombre" class="form-control" id="staticName" value="" placeholder="Introduzca el nombre">
+            <input type="text" name="nombre" class="form-control" id="staticName" value="<?php echo $nombre; ?>" placeholder="Introduzca el nombre">
             </div>
         </div>
         <input type="hidden" name="paso" value="1" />
         <div class="mb-3 row <?php echo $error_email; ?>">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+            <label for="errorEmail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-            <input type="text" name="email" class="form-control" id="staticEmail" value="" placeholder="Introduzca el email">
+            <input type="text" name="email" class="form-control" id="staticEmail" value="<?php echo $email; ?>" placeholder="Introduzca el email">
             </div>
         </div>
         <input type="hidden" name="paso" value="1" />
         <div class="mb-3 row <?php echo $error_edad; ?>">
-            <label for="staticEdad" class="col-sm-2 col-form-label">Edad</label>
+            <label for="errorEdad" class="col-sm-2 col-form-label">Edad</label>
             <div class="col-sm-10">
-            <input type="text" name="edad" class="form-control" id="staticEdad" value="" placeholder="Introduce tu edad">
+            <input type="text" name="edad" class="form-control" id="staticEdad" value="<?php echo $edad; ?>" placeholder="Introduce tu edad">
             </div>
         </div>
         <input type="hidden" name="paso" value="1" />
         <div class="mb-3 row <?php echo $error_pais; ?>">
             <label for="staticPais" class="col-sm-2 col-form-label">Pais</label>
             <div class="col-sm-10">
-            <input type="text" name="pais" class="form-control" id="staticPais" value="" placeholder="Introduce tu país">
+            <input type="text" name="pais" class="form-control" id="staticPais" value="<?php echo $pais; ?>" placeholder="Introduce tu país">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
